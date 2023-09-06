@@ -17,3 +17,9 @@ drop table matriculas;
 
 /*5*/
 select produto, SUM(receita) as receita_total from vendas group by produto;
+
+/*6*/
+select autores.nome as autor, count(livros.id) as total_livros
+from autores
+left join livros on autores.id = livros.autor_id
+group by autores.nome;
