@@ -29,3 +29,6 @@ select alunos.nome as aluno, count(alunos.id) as total_alunos
 from alunos
 inner join matriculas on alunos.id = matriculas.aluno_id
 group by alunos.nome;
+
+/*8*/
+select produto, AVG(receita) as receita_media from vendas group by produto;
