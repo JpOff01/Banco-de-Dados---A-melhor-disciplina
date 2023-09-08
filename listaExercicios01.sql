@@ -36,3 +36,8 @@ select produto, AVG(receita) as receita_media from vendas group by produto;
 /*9*/
 select produto, SUM(receita) as receita_total from vendas group by produto
 having SUM(receita) > 10000.00;
+
+/*10*/
+select autores.nome as autor, count(livros.id) as total_de_livros from autores
+left join livros on autores.id = livros.autor_id group by autores.nome
+having count(livros.id) > 2;
