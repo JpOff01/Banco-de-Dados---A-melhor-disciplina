@@ -23,3 +23,9 @@ select autores.nome as autor, count(livros.id) as total_livros
 from autores
 left join livros on autores.id = livros.autor_id
 group by autores.nome;
+
+/*7*/
+select alunos.nome as aluno, count(alunos.id) as total_alunos
+from alunos
+inner join matriculas on alunos.id = matriculas.aluno_id
+group by alunos.nome;
