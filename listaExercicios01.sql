@@ -57,3 +57,7 @@ left join livros on autores.id = livros.autor_id;
 /*14*/
 select matriculas.curso as curso, alunos.nome as aluno from matriculas
 right join alunos on matriculas.aluno_id = alunos.id;
+
+/*15*/
+select alunos.nome as Alunos, matriculas.curso as Curso from alunos
+inner join matriculas on alunos.id = matriculas.aluno_id;
