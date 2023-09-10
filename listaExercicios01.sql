@@ -45,3 +45,7 @@ having count(livros.id) > 2;
 /*11*/
 select livros.titulo, autores.nome as autor from livros
 inner join autores on livros.autor_id = autores.id;
+
+/*12*/
+select alunos.nome as Aluno, matriculas.curso as Curso from alunos
+left join matriculas on alunos.id = matriculas.aluno_id;
