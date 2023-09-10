@@ -41,3 +41,7 @@ having SUM(receita) > 10000.00;
 select autores.nome as autor, count(livros.id) as total_de_livros from autores
 left join livros on autores.id = livros.autor_id group by autores.nome
 having count(livros.id) > 2;
+
+/*11*/
+select livros.titulo, autores.nome as autor from livros
+inner join autores on livros.autor_id = autores.id;
