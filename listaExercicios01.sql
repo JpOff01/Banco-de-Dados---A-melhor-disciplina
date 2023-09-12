@@ -82,3 +82,10 @@ select alunos.nome as aluno, COUNT(matriculas.aluno_id) as total_de_matriculas
 from alunos
 left join matriculas on alunos.id = matriculas.aluno_id
 group by alunos.nome;
+
+/*20*/
+select produto, COUNT(*) as total_de_transacoes
+from vendas
+group by produto
+order by total_de_transacoes desc
+limit 1;
