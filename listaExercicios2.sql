@@ -143,3 +143,23 @@ delimiter ;
 
 call sp_AutorMaisAntigo();
 drop procedure sp_AutorMaisAntigo;
+
+/*9*/
+delimiter //
+-- O "categoria_nome" é um valor IN, ou seja, valor de entrada, sendo o nome da categoria.
+-- Já o "total_livros" é um valor OUT, ou seja, um parâmetro ou valor de saida e armazena o total de livros encontrados.
+create procedure sp_ContarLivrosPorCategoria(in categoria_nome varchar(255), out total_livros int)
+begin
+	-- Seleciona uma contagem de livros pertencentes a uma categoria específica.
+    -- Usa uma consulta SQL para contar os registros existentes na tabela "Livro".
+    select COUNT(*) into total_livros
+    from Livro
+    
+    -- Isso é feito através de um INNER JOIN usando a tabela "Categoria" usando a chave estrangeira "Categoria_ID".
+    inner join Categoria on Livro.Categoria_ID = Categoria.Categoria_ID
+    
+    -- Então, usamos o WHERE para filtrar os resultados para encontrar a categoria desejada.
+    where Categoria.Nome = categoria_nome;
+end;
+//
+delimiter ;
