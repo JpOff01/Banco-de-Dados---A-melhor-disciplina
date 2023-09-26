@@ -77,3 +77,18 @@ delimiter ;
 
 call sp_LivrosAteAno('2005');
 drop procedure sp_LivrosAteAno;
+
+/*6*/
+delimiter //
+create procedure sp_TitulosPorCategoria (in categoria_nome varchar(255))
+begin
+	select Livro.Titulo
+    from Livro
+    inner join Categoria on Livro.Categoria_ID = Categoria.Categoria_ID
+    where Categoria.Nome = categoria_nome;
+end;
+//
+delimiter ;
+
+call sp_TitulosPorCategoria('Ciência');
+drop procedure sp_TitulosPorCategoria;
