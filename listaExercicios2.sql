@@ -63,3 +63,17 @@ delimiter ;
 call sp_VerificarLivrosCategoria('História', @possui_livros);
 select @possui_livros;
 drop procedure sp_VerificarLivrosCategoria;
+
+/*5*/
+delimiter //
+create procedure sp_LivrosAteAno(in ano_publicacao int)
+begin
+    select Titulo, Editora_ID, Ano_Publicacao, Numero_Paginas, Categoria_ID
+    from Livro
+    where Ano_Publicacao <= ano_publicacao;
+end;
+//
+delimiter ;
+
+call sp_LivrosAteAno('2005');
+drop procedure sp_LivrosAteAno;
