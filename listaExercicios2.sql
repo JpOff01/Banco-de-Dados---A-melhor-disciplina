@@ -120,3 +120,26 @@ end;
 delimiter ;
 
 call sp_AdicionarLivro('Os males do vilão', 2, 2023, 320, 4);
+
+/*8*/
+delimiter //
+create procedure sp_AutorMaisAntigo()
+begin
+    declare AutorMaisAntigo varchar(255);
+    declare DataNascimento date;
+
+    -- Inicializar variáveis com valores padrão
+    set AutorMaisAntigo = '';
+    set DataNascimento = null;
+
+    select min(Data_Nascimento) into DataNascimento from Autor;
+
+    select Nome into AutorMaisAntigo from Autor where Data_Nascimento = DataNascimento;
+
+    select AutorMaisAntigo as 'Autor_Mais_Antigo';
+end; 
+//
+delimiter ;
+
+call sp_AutorMaisAntigo();
+drop procedure sp_AutorMaisAntigo;
