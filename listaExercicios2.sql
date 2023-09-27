@@ -163,3 +163,18 @@ begin
 end;
 //
 delimiter ;
+
+/*10*/ 
+delimiter //
+create procedure sp_LivrosESeusAutores()
+begin
+    select Livro.Titulo, Autor.Nome, Autor.Sobrenome
+    from Livro
+    inner join LivroAutor on Livro.Livro_ID = LivroAutor.Livro_ID
+    inner join Autor on LivroAutor.Autor_ID = Autor.Autor_ID;
+end;
+//
+delimiter ;
+
+call sp_LivrosESeusAutores();
+drop procedure sp_LivrosESeusAutores;
