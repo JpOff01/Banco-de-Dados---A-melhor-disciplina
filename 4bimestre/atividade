@@ -1,1 +1,87 @@
+create database trabalho_funcoes;
+use trabalho_funcoes;
 
+create table nomes (
+	nome varchar(250)
+);
+
+insert into nomes
+values
+('Roberta'),
+('Roberto'),
+('Maria Clara'),
+('João');
+
+select * from nomes;
+
+select upper(nome) as Uppernomes from nomes;
+
+select length(nome) as Lengthnome from nomes;
+
+select
+    case
+        when nome in ('Roberto', 'João') then CONCAT('Sr. ', nome)
+        else concat('Sra. ', nome)
+    end as nome_com_tratamento
+from nomes;
+
+/*----------------------------------------------*/
+create table produtos (
+	produto varchar(250),
+    preco varchar(100),
+    quantidade varchar(100)
+);
+
+insert into produtos
+values
+('Produto A', '121.455', 5),
+('Produto B', '137.855', 2),
+('Produto C', '380.921', 1),
+('Produto D', '123.574', 4),
+('Produto E', '254.626', 0);
+
+select * from produtos;
+drop table produtos;
+
+select produto, preco, round(preco, 2) as preco_arredondado
+from produtos;
+
+select produto, preco, abs(preco) as preco_absolute
+from produtos;
+
+select avg(cast(preco as decimal(10, 2))) as media_precos
+from produtos;
+
+select produto, preco, quantidade, if(quantidade > 0, 'Em estoque', 'Fora de estoque') as status_estoque
+from produtos;
+
+select produto, preco,
+case
+	when preco <= 150 then 'Barato'
+    when preco > 200 and preco < 300 then 'Médio'
+    when preco > 300 then 'Caro'
+end as produto_categoria
+from produtos;
+
+select count(*) as total_produtos from produtos;
+
+/*----------------------------------------------*/
+
+create table eventos (
+	data_evento date
+);
+
+insert into eventos
+values
+('2023-05-19'),
+('2023-06-04'),
+('2023-01-11'),
+('2023-05-23'),
+(NOW());
+
+select * from eventos;
+drop table eventos;
+
+select datediff('2023-05-19', '2023-01-11') as avg_dias;
+
+select dayname('2023-05-23') as dia_semanal;
