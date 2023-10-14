@@ -111,3 +111,35 @@ END //
 DELIMITER ;
 
 SELECT atualizar_resumos();
+
+/*04*/
+DELIMITER //
+
+CREATE FUNCTION media_livros_por_editora() RETURNS FLOAT
+DETERMINISTIC
+BEGIN
+    DECLARE total_editoras INT;
+    DECLARE total_livros INT;
+    DECLARE media FLOAT;
+
+    -- Obtendo o número total de editoras e de livros
+    SELECT COUNT(id) INTO total_editoras FROM Editora;
+    SELECT COUNT(id) INTO total_livros FROM Livro;
+
+    -- Inicializando a média como 0
+    SET media = 0;
+
+    -- Calculando a média diretamente
+    SELECT SUM(total_livros_por_editora) / total_editoras INTO media 
+    FROM (
+        SELECT COUNT(id) AS total_livros_por_editora 
+        FROM Livro 
+        GROUP BY id_editora
+    ) AS editora_count;
+
+    RETURN media;
+END //
+
+DELIMITER ;
+
+SELECT media_livros_por_editora();
