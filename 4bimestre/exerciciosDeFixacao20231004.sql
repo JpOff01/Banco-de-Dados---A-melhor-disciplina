@@ -75,3 +75,39 @@ BEGIN
 END //
 
 DELIMITER ;
+
+/*03*/
+DELIMITER //
+
+CREATE FUNCTION atualizar_resumos() RETURNS INT DETERMINISTIC
+BEGIN
+    DECLARE done INT DEFAULT FALSE;
+    DECLARE livro_id INT;
+    DECLARE resumo_atual TEXT;
+
+    -- Cursor para percorrer os livros
+    DECLARE cur CURSOR FOR SELECT id, resumo FROM Livro;
+    DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
+
+    OPEN cur;
+
+    read_loop: LOOP
+        FETCH cur INTO livro_id, resumo_atual;
+        IF done THEN
+            LEAVE read_loop;
+        END IF;
+
+        -- Atualizar o resumo com a frase adicional
+        UPDATE Livro
+        SET resumo = CONCAT(resumo_atual, ' Este é um excelente livro!')
+        WHERE id = livro_id;
+    END LOOP;
+
+    CLOSE cur;
+
+    RETURN 1; -- Indicação de conclusão
+END //
+
+DELIMITER ;
+
+SELECT atualizar_resumos();
